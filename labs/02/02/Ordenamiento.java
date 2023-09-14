@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class Ordenamiento
                 break;
             }
 
-            System.out.print("Ingrese la cantidad de números a ordenar (100, 500, 1000, 5000 o 10000): ");
+            System.out.print("Ingresa la cantidad de números a ordenar (100, 500, 1000, 5000 o 10000): ");
             int Cantidad = input.nextInt();
 
             double[] Arreglo = new double[Cantidad];
@@ -82,7 +83,7 @@ public class Ordenamiento
         input.close();
     }
 
-    // Métodos de ordenamiento 
+    // Metodos de ordenamiento 
 
     // Ordenamiento Burbuja
     public static void OrdenarBurbuja(double[] Arreglo) 
@@ -100,9 +101,10 @@ public class Ordenamiento
                 }
             }
         }
+        System.out.println("Arreglo ordenado con Burbuja: " + Arrays.toString(Arreglo));
     }
 
-    // Ordenamiento por Inserción
+    // Ordenamiento por Insercion
     public static void OrdenarInsercion(double[] Arreglo) 
     {
         int n = Arreglo.length;
@@ -117,9 +119,10 @@ public class Ordenamiento
             }
             Arreglo[j + 1] = Clave;
         }
+        System.out.println("Arreglo ordenado con Inserción: " + Arrays.toString(Arreglo));
     }
 
-    // Ordenamiento por Selección
+    // Ordenamiento por Seleccion
     public static void OrdenarSeleccion(double[] Arreglo) 
     {
         int n = Arreglo.length;
@@ -137,6 +140,7 @@ public class Ordenamiento
             Arreglo[IndiceMinimo] = Arreglo[i];
             Arreglo[i] = ValorTemporal;
         }
+        System.out.println("Arreglo ordenado con Selección: " + Arrays.toString(Arreglo));
     }
 
     // Ordenamiento Mergesort
@@ -149,9 +153,10 @@ public class Ordenamiento
             Mergesort(Arreglo, Medio + 1, Fin);
             merge(Arreglo, Inicio, Medio, Fin);
         }
+        System.out.println("Arreglo ordenado con Mergesort: " + Arrays.toString(Arreglo));
     }
 
-    // Método para combinar dos subarreglos ordenados
+    // Metodo para combinar dos subarreglos ordenados
     public static void merge(double[] Arreglo, int Inicio, int Medio, int Fin) 
     {
         int n1 = Medio - Inicio + 1;
