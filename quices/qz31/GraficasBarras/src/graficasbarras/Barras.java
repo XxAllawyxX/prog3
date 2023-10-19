@@ -137,8 +137,8 @@ public class Barras extends javax.swing.JFrame {
          // TODO add your handling code here:
          
          int n1= Integer.parseInt(jTextField1.getText());
-         int n2= Integer.parseInt(jTextField1.getText());
-         int n3= Integer.parseInt(jTextField1.getText());
+         int n2= Integer.parseInt(jTextField2.getText());
+         int n3= Integer.parseInt(jTextField3.getText());
         
          DefaultCategoryDataset datos = new DefaultCategoryDataset();
          
