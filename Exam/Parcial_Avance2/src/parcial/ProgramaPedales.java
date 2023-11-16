@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProgramaPedales {
+public class ProgramaPedales 
+{
 
     private JFrame frame;
     private JPanel PanelPedales, panelModoFuncionamiento, PanelIndicadores;
-    private JLabel labelPedalIzquierdo, labelPedalDerecho, labelVelocidad, labelCalorias, labelSwitch, labelContador1, labelContador2;
-    private JButton buttonPedalear1, buttonPedal2;
+    private JLabel labelPedal1, labelPedal2, labelIndicador1, labelIndicador2, labelSwitch, labelContador1, labelContador2;
+    private JButton buttonPedal1, buttonPedal2;
     private JToggleButton toggleSwitch;
     private int contadorPedal1 = 0, contadorPedal2 = 0, totalCalorias = 0;
 
@@ -32,25 +33,25 @@ public class ProgramaPedales {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // Panel de Pedales
+       
         PanelPedales = new JPanel(new GridLayout(2, 2));
-        labelPedalIzquierdo = new JLabel("Pedal Izquierdo:");
-        buttonPedalear = new JButton("Pedalear");
+        labelPedal1 = new JLabel("Pedal Izquierdo:");
+        buttonPedal1 = new JButton("Pedalea!!");
         labelContador1 = new JLabel("Contador: 0");
-        buttonPedalear.addActionListener(e -> onPedalClick(1));
+        buttonPedal1.addActionListener(e -> onPedalClick(1));
 
-        labelPedalDerecho = new JLabel("Pedal Derecho:");
-        buttonPedal2 = new JButton("Pedalear");
+        labelPedal2 = new JLabel("Pedal Derecho:");
+        buttonPedal2 = new JButton("Pedalea!!");
         labelContador2 = new JLabel("Contador: 0");
         buttonPedal2.addActionListener(e -> onPedalClick(2));
 
-        PanelPedales.add(labelPedalIzquierdo);
-        PanelPedales.add(buttonPedalear);
-        PanelPedales.add(labelPedalDerecho);
+        PanelPedales.add(labelPedal1);
+        PanelPedales.add(buttonPedal1);
+        PanelPedales.add(labelPedal2);
         PanelPedales.add(buttonPedal2);
         PanelPedales.setBorder(BorderFactory.createTitledBorder("Pedales"));
 
-        // Cambiar de Manual a Automatico 
+        // Modo Automatico o Manual 
         panelModoFuncionamiento = new JPanel(new FlowLayout());
         labelSwitch = new JLabel("Modo: Manual");
         toggleSwitch = new JToggleButton("Automático");
@@ -58,23 +59,22 @@ public class ProgramaPedales {
 
         panelModoFuncionamiento.add(labelSwitch);
         panelModoFuncionamiento.add(toggleSwitch);
-        panelModoFuncionamiento.setBorder(BorderFactory.createTitledBorder("Modo De Funcionamiento"));
+        panelModoFuncionamiento.setBorder(BorderFactory.createTitledBorder("Modo Funcionamiento"));
 
-        // Panel de Indicadores
+        
         PanelIndicadores = new JPanel(new GridLayout(2, 1));
-        labelVelocidad = new JLabel("Velocidad: 0");
-        labelCalorias = new JLabel("Calorías: 0");
+        labelIndicador1 = new JLabel("Velocidad -> 0");
+        labelIndicador2 = new JLabel("Calorias -> 0");
 
-        PanelIndicadores.add(labelVelocidad);
-        PanelIndicadores.add(labelCalorias);
-        PanelIndicadores.setBorder(BorderFactory.createTitledBorder("Indicadores de Velocidad y Calorias"));
+        PanelIndicadores.add(labelIndicador1);
+        PanelIndicadores.add(labelIndicador2);
+        PanelIndicadores.setBorder(BorderFactory.createTitledBorder("Indicadores"));
 
-        // Añadir paneles al marco
         frame.add(PanelPedales, BorderLayout.WEST);
         frame.add(panelModoFuncionamiento, BorderLayout.CENTER);
         frame.add(PanelIndicadores, BorderLayout.EAST);
 
-        //  Timer para actualizar los indicadores cada 1 segundo
+        // Timer para actualizar los indicadores cada 1 segundo
         Timer timer = new Timer(1000, e -> updateIndicators());
         timer.start();
 
@@ -82,3 +82,32 @@ public class ProgramaPedales {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
+    private void onPedalClick(int pedal) {
+        switch (pedal) {
+            case 1:
+                contadorPedal1++;
+                labelContador1.setText("Contador: " + contadorPedal1);
+                break;
+            case 2:
+                contadorPedal2++;
+                labelContador2.setText("Contador: " + contadorPedal2);
+                break;
+        }
+
+        // Verifica si se han hecho 4 clics en total
+        if ((contadorPedal1 + contadorPedal2) % 4 == 0) {
+            // Se quemar 100 calorías por cada 4 clics
+            totalCalorias += 100;
+        }
+    }
+
+    private void onSwitchToggle() {
+        if (toggleSwitch.isSelected()) {
+            labelSwitch.setText("Modo: Automático");
+        } else {
+            labelSwitch.setText("Modo: Manual");
+        }
+    }
+
+ 
